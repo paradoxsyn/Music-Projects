@@ -6,6 +6,9 @@
     <string name="button_3">Range</string>
     <string name="button_4">About</string>
     <string name="title">League Optional Schooling Utility</string>
+    <string name="reflextitle">Please choose a champion</string>
+    <string name="annie">Annie</string>
+    <string name="ryze">Ryze</string>
 
 
 </resources>

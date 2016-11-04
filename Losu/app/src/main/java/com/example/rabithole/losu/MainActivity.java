@@ -1,5 +1,6 @@
 package com.example.rabithole.losu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -28,7 +29,11 @@ public class MainActivity extends AppCompatActivity {
         {
             public void onClick(View v)
             {
-                setContentView(R.layout.reflex_test);
+
+                Intent intent = new Intent(getApplicationContext(),com.example.rabithole.losu.ReflexTest.class);
+                startActivity(intent);
+                //ReflexTest reflex = new ReflexTest();
+
             }
 
         }
