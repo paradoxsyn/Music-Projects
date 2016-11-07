@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,7 +54,7 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
 
             grid = new View(context);
-            grid = inflater.inflate(R.layout.grid_single,null);
+            grid = inflater.inflate(R.layout.champ_pic,null);
 
             TextView textView =  (TextView) grid.findViewById(R.id.grid_text);
 

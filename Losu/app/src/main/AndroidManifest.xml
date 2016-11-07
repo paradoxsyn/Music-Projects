@@ -15,8 +15,14 @@
         </intent-filter>
         </activity>
 
-        <activity android:name=".ReflexTest" >
+        <activity android:name=".PickChamp" >
             <action android:name="android.intent.action.DISPLAY" />
+        </activity>
+        
+        <activity android:name=".Ryze">
+            <action android:name="android.intent.action.DISPLAY" >
+
+            </action>
 
         </activity>
 
