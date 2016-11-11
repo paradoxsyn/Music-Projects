@@ -9,6 +9,8 @@
     <string name="reflextitle">Please choose a champion</string>
     <string name="annie">Annie</string>
     <string name="ryze">Ryze</string>
+    <string name="ryze_start">Start</string>
+    <string name="ryze_stop">Stop</string>
 
 
 </resources>
