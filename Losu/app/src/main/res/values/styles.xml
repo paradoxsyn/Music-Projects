@@ -3,10 +3,24 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="actionMenuTextColor">@color/ryze_title</item>
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/pitch_black</item>
-        <item name="colorPrimaryDark">@color/pitch_black</item>
-        <item name="colorAccent">@color/pitch_black</item>
     </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="actionMenuTextColor">@color/ryze_title</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">@color/ryze_title</item>
+        <item name="android:colorBackground">@color/ryze_bar</item>
+    </style>`
+
+    <style name="DropDownItemSpinnerTheme" parent="android:Widget.DropDownItem.Spinner">
+        <item name="android:background">@color/ryze_bar</item>
+    </style>
+
 
 </resources>

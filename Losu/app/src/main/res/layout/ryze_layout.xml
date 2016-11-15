@@ -1,16 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/pitch_black"
+    android:background="@color/ryze_body"
     android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/ryze_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/ryze_bar"
+        android:elevation="4dp"
+        app:popupTheme="@style/AppTheme.ActionBar"
+        android:theme="@style/AppTheme.ActionBar"
+        android:fitsSystemWindows="true"
+        app:titleTextColor="@color/ryze_title"
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
 
     <Button
         android:id="@+id/ryze_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center"
+        android:layout_gravity="center|bottom"
         android:layout_weight="0"
         android:gravity="bottom"
         android:text="@string/ryze_start"
@@ -22,7 +34,7 @@
         android:id="@+id/ryze_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center"
+        android:layout_gravity="center"
         android:layout_weight="0"
         android:gravity="bottom"
         android:text="@string/ryze_stop"
@@ -31,44 +43,95 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:background="@color/pitch_black"
-    android:layout_height="match_parent">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="@color/ryze_body"
+    android:layout_weight="1"
+    android:weightSum="4"
+    android:layout_height="0dp">
 
 
-    <Button
+    <ImageButton
         android:id="@+id/ryze_1"
         android:layout_width="wrap_content"
+        android:src="@drawable/overload"
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content" />
 
-    <Button
+    <ImageButton
         android:id="@+id/ryze_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/runeprison"
         android:layout_marginLeft="5dp"
+        android:layout_weight="1"
         android:layout_marginRight="5dp"
         android:layout_gravity="center"
          />
 
-    <Button
+    <ImageButton
         android:id="@+id/ryze_3"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
+        android:src="@drawable/spellflux"
         android:layout_marginLeft="5dp"
+        android:layout_weight="1"
         android:layout_marginRight="5dp"
         android:layout_height="wrap_content" />
-    <Button
+    <ImageButton
         android:id="@+id/ryze_4"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:src="@drawable/realmwarp"
         android:layout_marginRight="5dp"
         android:layout_height="wrap_content" />
+</LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_width="fill_parent">
 
+        <Spinner
+            android:id="@+id/q_spinner"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ryze_bar"
+            android:popupBackground="@color/ryze_bar"
+            android:prompt="@string/level"/>
+        <Spinner
+            android:id="@+id/w_spinner"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:backgroundTint="@color/ryze_bar"
+            android:layout_height="wrap_content"
+            android:popupBackground="@color/ryze_bar"
+            android:prompt="@string/level"/>
+        <Spinner
+            android:id="@+id/e_spinner"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:backgroundTint="@color/ryze_bar"
+            android:layout_height="wrap_content"
+            android:popupBackground="@color/ryze_bar"
+            android:prompt="@string/level"/>
+        <Spinner
+            android:id="@+id/r_spinner"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:backgroundTint="@color/ryze_bar"
+            android:layout_height="wrap_content"
+            android:popupBackground="@color/ryze_bar"
+            android:prompt="@string/level"/>
+    </LinearLayout>
 
 </LinearLayout>
 
-</LinearLayout>
+
+
