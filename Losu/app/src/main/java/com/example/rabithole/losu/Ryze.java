@@ -14,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,6 +48,12 @@ public class Ryze extends AppCompatActivity {
     Button cooldown3;
     Button cooldown4;
 
+    final Animation in = new AlphaAnimation(0.0f, 1.0f);
+    final Animation out = new AlphaAnimation(1.0f, 0.0f);
+
+
+
+
 
     public Runnable runone = new Runnable() {
         @Override
@@ -65,9 +74,11 @@ public class Ryze extends AppCompatActivity {
                         r1.setBackgroundColor(Color.GREEN);
                         r1.setClickable(false);
                         handler.postDelayed(runone, ryzeQ);
+                        animateButton();
                     }
                 });r1.setBackgroundColor(Color.RED);
                 r1.setClickable(true);
+
             }
         }
     };
@@ -326,7 +337,16 @@ public class Ryze extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
                 if(position == 1){
-                    ryzeW = ryzeW - 9000;
+                    ryzeW = ryzeW - 1000;
+                }
+                else if(position == 2){
+                    ryzeW = ryzeW - 2000;
+                }
+                else if(position == 3){
+                    ryzeW = ryzeW - 3000;
+                }
+                else if(position == 4){
+                    ryzeW = ryzeW - 4000;
                 }
             }
 
@@ -337,10 +357,36 @@ public class Ryze extends AppCompatActivity {
 
         });
     }
+    public void spinnerReset()
+    {
+        Spinner spinnerq = (Spinner) findViewById(R.id.q_spinner);
+        Spinner spinnerw = (Spinner) findViewById(R.id.w_spinner);
+        Spinner spinnere = (Spinner) findViewById(R.id.e_spinner);
+        Spinner spinnerr = (Spinner) findViewById(R.id.r_spinner);
+
+        spinnerq.setSelection(0);
+        spinnerw.setSelection(0);
+        spinnere.setSelection(0);
+        spinnerr.setSelection(0);
+    }
+
+    public void animateButton(){
+
+        in.setDuration(3000);
+        out.setDuration(3000);
+
+        AnimationSet as = new AnimationSet(true);
+        as.addAnimation(out);
+        in.setStartOffset(3000);
+        as.addAnimation(in);
+
+        r1.startAnimation(as);
+    }
 
     public void stopButton()
     {
         stop();
+        spinnerReset();
     }
 }
 
