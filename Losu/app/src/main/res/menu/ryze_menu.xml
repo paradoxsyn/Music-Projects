@@ -24,10 +24,10 @@
     </item>
 
     <item
-        android:id="@+id/search"
+        android:id="@+id/information"
         android:orderInCategory="100"
         android:title="@string/ryze_title"
         app:showAsAction="always"
-        android:icon="@drawable/ryzeicon"
+        android:icon="@drawable/infoicon"
         />
 </menu>

@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:layout_weight="0"
-        android:gravity="bottom"
+        android:background="@drawable/ryzestartstop"
         android:text="@string/ryze_start"
         android:textAllCaps="true"
         android:textAlignment="center"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="0"
-        android:gravity="bottom"
+        android:background="@drawable/ryzestartstopinvert"
         android:text="@string/ryze_stop"
         android:textAllCaps="true"
         android:textAlignment="center"/>
@@ -50,11 +50,10 @@
     android:weightSum="4"
     android:layout_height="0dp">
 
-
     <ImageButton
         android:id="@+id/ryze_1"
         android:layout_width="wrap_content"
-        android:src="@drawable/overload"
+        android:background="@drawable/overload"
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -65,7 +64,7 @@
         android:id="@+id/ryze_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/runeprison"
+        android:background="@drawable/runeprison"
         android:layout_marginLeft="5dp"
         android:layout_weight="1"
         android:layout_marginRight="5dp"
@@ -76,7 +75,7 @@
         android:id="@+id/ryze_3"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/spellflux"
+        android:background="@drawable/spellflux"
         android:layout_marginLeft="5dp"
         android:layout_weight="1"
         android:layout_marginRight="5dp"
@@ -87,13 +86,13 @@
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_weight="1"
-        android:src="@drawable/realmwarp"
+        android:background="@drawable/realmwarp"
         android:layout_marginRight="5dp"
         android:layout_height="wrap_content" />
 </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_weight="1"
         android:layout_width="fill_parent">
 
@@ -130,6 +129,7 @@
             android:popupBackground="@color/ryze_bar"
             android:prompt="@string/level"/>
     </LinearLayout>
+
 
 </LinearLayout>
 

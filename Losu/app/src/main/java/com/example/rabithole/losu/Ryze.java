@@ -1,30 +1,46 @@
 package com.example.rabithole.losu;
 
+import android.animation.ObjectAnimator;
 import android.app.ActionBar;
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.R.attr.button;
+import static java.security.AccessController.getContext;
 
 /**
  * Created by Rabithole on 11/5/2016.
@@ -39,20 +55,24 @@ public class Ryze extends AppCompatActivity {
     ImageButton r2;
     ImageButton r3;
     ImageButton r4;
+
     int ryzeQ;
     int ryzeW;
     int ryzeE;
     int ryzeR;
+
     Button cooldown1;
     Button cooldown2;
     Button cooldown3;
     Button cooldown4;
+    Button ryzeinfo;
 
-    final Animation in = new AlphaAnimation(0.0f, 1.0f);
-    final Animation out = new AlphaAnimation(1.0f, 0.0f);
+    LayoutInflater ryzeToast;
 
-
-
+    AnimationDrawable qanim = new AnimationDrawable();
+    AnimationDrawable wanim = new AnimationDrawable();
+    AnimationDrawable eanim = new AnimationDrawable();
+    AnimationDrawable ranim = new AnimationDrawable();
 
 
     public Runnable runone = new Runnable() {
@@ -62,21 +82,16 @@ public class Ryze extends AppCompatActivity {
             r2 = (ImageButton) findViewById(R.id.ryze_2);
             r3 = (ImageButton) findViewById(R.id.ryze_3);
             r4 = (ImageButton) findViewById(R.id.ryze_4);
-            ryzeQ = 6000;
-            ryzeW = 13000;
-            ryzeE = 2250;
-            ryzeR = 120000;
 
             if(started){
                 r1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        r1.setBackgroundColor(Color.GREEN);
                         r1.setClickable(false);
                         handler.postDelayed(runone, ryzeQ);
-                        animateButton();
+                        animateButtonQ();
                     }
-                });r1.setBackgroundColor(Color.RED);
+                });r1.setBackgroundResource(R.drawable.overload);
                 r1.setClickable(true);
 
             }
@@ -94,14 +109,15 @@ public class Ryze extends AppCompatActivity {
             r2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    r2.setBackgroundColor(Color.GREEN);
-                    r1.setBackgroundColor(Color.RED);
+                    qanim.stop();
+                    r1.setBackgroundResource(R.drawable.overload);
                     r1.setClickable(true);
                     handler.removeCallbacks(runone);
                     r2.setClickable(false);
                     handler.postDelayed(runtwo, ryzeW);
+                    animateButtonW();
                 }
-            });r2.setBackgroundColor(Color.RED);
+            });r2.setBackgroundResource(R.drawable.runeprison);
             r2.setClickable(true);
 
         }
@@ -118,14 +134,15 @@ public class Ryze extends AppCompatActivity {
             r3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    r3.setBackgroundColor(Color.GREEN);
-                    r1.setBackgroundColor(Color.RED);
+                    qanim.stop();
+                    r1.setBackgroundResource(R.drawable.overload);
                     r1.setClickable(true);
                     handler.removeCallbacks(runone);
                     r3.setClickable(false);
                     handler.postDelayed(runthree, ryzeE);
+                    animateButtonE();
                 }
-            });r3.setBackgroundColor(Color.RED);
+            });r3.setBackgroundResource(R.drawable.spellflux);
             r3.setClickable(true);
 
         }
@@ -142,20 +159,20 @@ public class Ryze extends AppCompatActivity {
             r4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    r4.setBackgroundColor(Color.GREEN);
                     handler.postDelayed(runfour, ryzeR);
+                    animateButtonR();
                 }
-            });
+            });r4.setBackgroundResource(R.drawable.realmwarp);
         }
     };
 
     public void stop() {
         started = false;
 
-        r1.setBackgroundColor(Color.BLUE);
-        r2.setBackgroundColor(Color.BLUE);
-        r3.setBackgroundColor(Color.BLUE);
-        r4.setBackgroundColor(Color.BLUE);
+        r1.setBackgroundResource(R.drawable.overload);
+        r2.setBackgroundResource(R.drawable.runeprison);
+        r3.setBackgroundResource(R.drawable.spellflux);
+        r4.setBackgroundResource(R.drawable.realmwarp);
 
         handler.removeCallbacks(runone);
         handler.removeCallbacks(runtwo);
@@ -172,15 +189,16 @@ public class Ryze extends AppCompatActivity {
         ryzeE = 2250;
         ryzeR = 120000;
 
+        r1.clearAnimation();
+        r2.clearAnimation();
+        r3.clearAnimation();
+        r4.clearAnimation();
+
+
     }
 
     public void start() {
         started = true;
-
-        r1.setBackgroundColor(Color.RED);
-        r2.setBackgroundColor(Color.RED);
-        r3.setBackgroundColor(Color.RED);
-        r4.setBackgroundColor(Color.RED);
 
         handler.post(runone);
         handler.post(runtwo);
@@ -192,6 +210,11 @@ public class Ryze extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ryze_layout);
+
+        ryzeQ = 6000;
+        ryzeW = 13000;
+        ryzeE = 2250;
+        ryzeR = 120000;
 
         Toolbar ryzebar = (Toolbar) findViewById(R.id.ryze_bar);
         setSupportActionBar(ryzebar);
@@ -212,10 +235,6 @@ public class Ryze extends AppCompatActivity {
         cooldown3 = (Button) findViewById(R.id.cooldown30);
         cooldown4 = (Button) findViewById(R.id.cooldown40);
 
-        r1.setBackgroundColor(Color.BLUE);
-        r2.setBackgroundColor(Color.BLUE);
-        r3.setBackgroundColor(Color.BLUE);
-        r4.setBackgroundColor(Color.BLUE);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,6 +249,7 @@ public class Ryze extends AppCompatActivity {
                 stopButton();
             }
         });
+
     }
 
 
@@ -251,7 +271,6 @@ public class Ryze extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        //setContentView(R.layout.ryze_fragment);
 
         if(id == R.id.cooldown10){
             //has to be running
@@ -298,15 +317,24 @@ public class Ryze extends AppCompatActivity {
             ryzeE = 1325;
             ryzeR = 72000;
         }
+
+        else if(id == R.id.information){
+            Intent intent = new Intent(getApplicationContext(), com.example.rabithole.losu.RyzeWeb.class);
+            startActivity(intent);
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-        finish();
+        //if (ryzeWeb.canGoBack()){
+           // ryzeWeb.goBack();
+       // }
+       // else
+            //super.onBackPressed();
+            finish();
     }
-
-
 
     public void startButton()
     {
@@ -336,25 +364,69 @@ public class Ryze extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
-                if(position == 1){
+                if(position == 1 && started == true){
                     ryzeW = ryzeW - 1000;
                 }
-                else if(position == 2){
+                else if(position == 2 && started == true){
                     ryzeW = ryzeW - 2000;
                 }
-                else if(position == 3){
+                else if(position == 3 && started == true){
                     ryzeW = ryzeW - 3000;
                 }
-                else if(position == 4){
+                else if(position == 4 && started == true){
                     ryzeW = ryzeW - 4000;
                 }
+                else if(started == false && position != 0){
+                    Toast.makeText(Ryze.this, "Please press start first ", Toast.LENGTH_SHORT).show();
+                    spinnerReset();
+                }
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
             }
 
+        });
+        spinnerq.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (started == false && position != 0) {
+                    Toast.makeText(Ryze.this, "Please press start first ", Toast.LENGTH_SHORT).show();
+                    spinnerReset();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+        spinnere.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (started == false && position != 0) {
+                    Toast.makeText(Ryze.this, "Please press start first ", Toast.LENGTH_SHORT).show();
+                    spinnerReset();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+        spinnerr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (started == false && position != 0) {
+                    Toast.makeText(Ryze.this, "Please press start first ", Toast.LENGTH_SHORT).show();
+                    spinnerReset();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
         });
     }
     public void spinnerReset()
@@ -370,17 +442,57 @@ public class Ryze extends AppCompatActivity {
         spinnerr.setSelection(0);
     }
 
-    public void animateButton(){
+    public void animateButtonQ(){
 
-        in.setDuration(3000);
-        out.setDuration(3000);
+        r1.setBackgroundResource(R.drawable.overload_cooldown);
 
-        AnimationSet as = new AnimationSet(true);
-        as.addAnimation(out);
-        in.setStartOffset(3000);
-        as.addAnimation(in);
+        qanim = (AnimationDrawable) r1.getBackground();
+        qanim.setEnterFadeDuration(ryzeQ);
 
-        r1.startAnimation(as);
+        ryzeToast = getLayoutInflater();
+
+        View toastlay =ryzeToast.inflate(R.layout.ryze_toast,(ViewGroup)findViewById(R.id.toastlayout));
+        final TextView messageOne=(TextView)toastlay.findViewById(R.id.cloudmessage);
+        messageOne.setText("Quick! Click it again Summoner!");
+
+        final Toast lastToast=new Toast(getApplicationContext());
+        lastToast.setDuration(Toast.LENGTH_SHORT);
+        lastToast.setView(toastlay);
+        //myToast.show();
+        qanim.start();
+
+        new CountDownTimer(ryzeQ, ryzeQ / 2)
+        {
+
+            public void onTick(long millisUntilFinished) {messageOne.setText("OooOoOoo..I hear it ticking..");lastToast.show();}
+            public void onFinish() {messageOne.setText("Quick! Click it again Summoner!");lastToast.show();}
+
+        }.start();
+    }
+    public void animateButtonW(){
+
+        r2.setBackgroundResource(R.drawable.runeprison_cooldown);
+
+        wanim = (AnimationDrawable) r2.getBackground();
+        wanim.setEnterFadeDuration(ryzeW);
+        //Toast.makeText(Ryze.this, "" + ryzeW, Toast.LENGTH_SHORT).show();
+        wanim.start();
+    }
+    public void animateButtonE(){
+
+        r3.setBackgroundResource(R.drawable.spellflux_cooldown);
+
+        eanim = (AnimationDrawable) r3.getBackground();
+        eanim.setEnterFadeDuration(ryzeE);
+        eanim.start();
+    }
+    public void animateButtonR(){
+
+        r4.setBackgroundResource(R.drawable.realmwarp_cooldown);
+
+        ranim = (AnimationDrawable) r4.getBackground();
+        ranim.setEnterFadeDuration(ryzeR);
+        ranim.start();
     }
 
     public void stopButton()
