@@ -453,7 +453,6 @@ public class Ryze extends AppCompatActivity {
 
         View toastlay =ryzeToast.inflate(R.layout.ryze_toast,(ViewGroup)findViewById(R.id.toastlayout));
         final TextView messageOne=(TextView)toastlay.findViewById(R.id.cloudmessage);
-        messageOne.setText("Quick! Click it again Summoner!");
 
         final Toast lastToast=new Toast(getApplicationContext());
         lastToast.setDuration(Toast.LENGTH_SHORT);
@@ -464,8 +463,16 @@ public class Ryze extends AppCompatActivity {
         new CountDownTimer(ryzeQ, ryzeQ / 2)
         {
 
-            public void onTick(long millisUntilFinished) {messageOne.setText("OooOoOoo..I hear it ticking..");lastToast.show();}
+            public void onTick(long millisUntilFinished) {messageOne.setText("I hear it ticking..finally");lastToast.show();}
             public void onFinish() {messageOne.setText("Quick! Click it again Summoner!");lastToast.show();}
+
+        }.start();
+
+        new CountDownTimer(ryzeQ, 1000)
+        {
+            final TextView timerq =(TextView) findViewById(R.id.ryzetimer1);
+            public void onTick(long millisUntilFinished) {timerq.setText(""+millisUntilFinished / 1000);}
+            public void onFinish() {}
 
         }.start();
     }

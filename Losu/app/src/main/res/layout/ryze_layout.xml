@@ -46,7 +46,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:background="@color/ryze_body"
-    android:layout_weight="1"
+    android:layout_weight="0.5"
     android:weightSum="4"
     android:layout_height="0dp">
 
@@ -90,6 +90,44 @@
         android:layout_marginRight="5dp"
         android:layout_height="wrap_content" />
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:weightSum="4">
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/ryzetimer1"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textStyle="italic|bold"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/ryzetimer2"
+            android:textStyle="italic|bold"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/ryzetimer3"
+            android:textStyle="italic|bold"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/ryzetimer4"
+            android:textStyle="italic|bold"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_height="20dp"

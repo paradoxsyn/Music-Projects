@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/toastlayout"
-    android:background="@color/ryze_body"
-    android:orientation="horizontal" >
+    android:background="@color/ryze_body">
 
     <ImageView
         android:id="@+id/teacher"
