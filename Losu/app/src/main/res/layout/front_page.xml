@@ -7,13 +7,18 @@
     android:background="@drawable/heimertitle">
 
 
-    <TextView
+    <dj.rabithole.losu.MagicTextView xmlns:qwerjk="http://schemas.android.com/apk/res/dj.rabithole.losu"
+        android:id="@+id/titletext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title"
         android:textSize="32sp"
         android:textColor="@color/title_color"
         android:textAlignment="center"
+        qwerjk:innerShadowRadius="1dp"
+        qwerjk:outerShadowDy="3dp"
+        qwerjk:outerShadowColor="#FF0088ff"
+        qwerjk:innerShadowDy="2dp"
         />
 
 
@@ -28,9 +33,10 @@
         android:layout_width="wrap_content"
         android:layout_margin="20dp"
         android:layout_gravity="center_horizontal|center"
-        android:textSize="20dp"
+        android:textSize="40dp"
         android:textColor="@color/button_color"
         style="?android:attr/borderlessButtonStyle"
+        android:textStyle="bold"
         android:text="@string/button_1">
 
     </Button>
@@ -40,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_margin="20dp"
         android:layout_gravity="center_horizontal|center"
-        android:textSize="20dp"
+        android:textSize="40dp"
         android:textColor="@color/button_color"
         style="?android:attr/borderlessButtonStyle"
         android:text="@string/button_2">
@@ -52,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_margin="20dp"
         android:layout_gravity="center_horizontal|center"
-        android:textSize="20dp"
+        android:textSize="40dp"
         android:textColor="@color/button_color"
         style="?android:attr/borderlessButtonStyle"
         android:text="@string/button_3">
@@ -64,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_margin="20dp"
         android:layout_gravity="center_horizontal|center"
-        android:textSize="20dp"
+        android:textSize="40dp"
         android:textColor="@color/button_color"
         style="?android:attr/borderlessButtonStyle"
         android:text="@string/button_4">

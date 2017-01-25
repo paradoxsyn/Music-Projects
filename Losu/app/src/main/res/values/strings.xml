@@ -17,6 +17,7 @@
     <string name="cooldown30">30% Cooldown</string>
     <string name="cooldown40">40% Cooldown</string>
     <string name="level">Level</string>
+    <string name="crystals">Crystals:</string>
 
     <string-array name="levels_array">
         <item>1</item>
