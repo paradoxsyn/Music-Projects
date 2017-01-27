@@ -11,27 +11,32 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-import sun.rmi.runtime.Log;
 
 public class Losu extends ScreenAdapter {
 
@@ -52,6 +57,11 @@ public class Losu extends ScreenAdapter {
 	private TextButton button4;
 	float w;
 	float h;
+	Image logo;
+	float elapsedTime = 0f;
+	//Image poro;
+
+
 
 
 	public Losu(LosuGame game){
@@ -106,7 +116,37 @@ public class Losu extends ScreenAdapter {
 		button3.setPosition(Gdx.graphics.getWidth()/3-button.getWidth()/2, Gdx.graphics.getHeight()/6+ Gdx.graphics.getHeight()/18);
 		button4.setPosition(Gdx.graphics.getWidth()/4-button.getWidth()/2, Gdx.graphics.getHeight()/36+ h/108);
 
-		button.addAction(Actions.)
+		logo = new Image(Assets.logo);
+		//poro = new Image(Assets.poro);
+		logo.setPosition(w/2-w/8,h/2+h/3,Align.center);
+		logo.setScale(1.5f,1.5f);
+
+		MoveToAction poromove = new MoveToAction();
+		poromove.setPosition(w-200,h/2-h/2);
+		poromove.setDuration(1.0f);
+
+		//poro.setPosition(w-200,h/2-h/2-h/7);
+		//poro.setScale(0.5f);
+
+
+		MoveToAction movedown = new MoveToAction();
+		movedown.setPosition(w/2-w/8, h/2+h/4+h/10,Align.center);
+		movedown.setDuration(0.8f);
+
+		MoveToAction moveup = new MoveToAction();
+		moveup.setPosition(w/2-w/8, h/2+h/3,Align.center);
+		moveup.setDuration(0.8f);
+
+		SequenceAction seq = new SequenceAction(moveup,movedown);
+
+		RepeatAction logmove = new RepeatAction();
+		logmove.setAction(seq);
+		logmove.setCount(RepeatAction.FOREVER);
+
+
+		logo.addAction(logmove);
+		//poro.addAction(Actions.delay(3.0f,poromove));
+
 
 
 		button.addListener(new InputListener() {
@@ -130,11 +170,12 @@ public class Losu extends ScreenAdapter {
 		});
 
 
-
+		//stage.addActor(poro);
 		stage.addActor(button);
 		stage.addActor(button2);
 		stage.addActor(button3);
 		stage.addActor(button4);
+		stage.addActor(logo);
 
 
 
@@ -142,32 +183,39 @@ public class Losu extends ScreenAdapter {
 
 	public void update() {
 
-		if(Gdx.input.justTouched()) {
+		//if(Gdx.input.justTouched()) {
 
-			guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+			//guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
 
-			if (reactionBounds.contains(touchPoint.x, touchPoint.y)) {
-				System.out.println("FK");
-			}
+			//if (reactionBounds.contains(touchPoint.x, touchPoint.y)) {
+			//	System.out.println("FK");
+			//}
+		//}
+		if(elapsedTime == 5){
 		}
+
 	}
 
 
 	public void draw() {
+		elapsedTime += Gdx.graphics.getDeltaTime();
 		GL20 gl = Gdx.gl;
 		gl.glClearColor(1, 0, 0, 1);
 		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//guiCam.update();
-		stage.act();
 		game.batcher.begin();
 		stage.draw();
+		stage.act();
+		game.batcher.end();
+		game.batcher.begin();
+		game.batcher.draw(Assets.poroanim.getKeyFrame(elapsedTime,true),w/2+300,h/2 - h/2 - h/4,0,0,w,h,0.25f,0.25f,0);
 		game.batcher.end();
 
 	}
 	@Override
 	public void render(float delta) {
-		//update();
+		update();
 		draw();
 
 	}
